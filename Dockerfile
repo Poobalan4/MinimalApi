@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["ApiDockerAzure.csproj", "."]
-RUN dotnet restore "./ApiDockerAzure.csproj"
+COPY ["MinimalApi.csproj", "."]
+RUN dotnet restore "./MinimalApi.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "ApiDockerAzure.csproj" -c Release -o /app/build
+RUN dotnet build "MinimalApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ApiDockerAzure.csproj" -c Release -o /app/publish
+RUN dotnet publish "MinimalApi.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ApiDockerAzure.dll"]
+ENTRYPOINT ["dotnet", "MinimalApi.dll"]
