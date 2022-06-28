@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiDockerAzure.Controllers
+namespace MinimalApi
 {
     [ApiController]
     [Route("[controller]")]
